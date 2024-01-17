@@ -6,17 +6,17 @@ public class User {
     private String password;
     private String picture;
     private int attempts;
-    private boolean is_locked;
+    private boolean locked;
 
     public User() {
     }
 
-    public User(String username, String password, String picture, int attempts, boolean is_locked) {
+    public User(String username, String password, String picture, int attempts, boolean locked) {
         this.username = username;
         this.password = password;
         this.picture = picture;
         this.attempts = attempts;
-        this.is_locked = is_locked;
+        this.locked = locked;
     }
 
     public User(int id, String username, String password, String picture, int attempts, boolean is_locked) {
@@ -25,7 +25,7 @@ public class User {
         this.password = password;
         this.picture = picture;
         this.attempts = attempts;
-        this.is_locked = is_locked;
+        this.locked = is_locked;
     }
 
     public int getId() {
@@ -68,11 +68,11 @@ public class User {
         this.attempts = attempts;
     }
 
-    public boolean isIs_locked() {
-        return is_locked;
+    public boolean islocked() {
+        return locked;
     }
 
-    public void setIs_locked(boolean is_locked) {
-        this.is_locked = is_locked;
+    public void setlocked(boolean is_locked) {
+        this.locked = is_locked;
     }
 }
