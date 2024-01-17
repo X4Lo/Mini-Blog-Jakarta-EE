@@ -11,6 +11,14 @@ public class User {
     public User() {
     }
 
+    public User(String username, String password, String picture, int attempts, boolean is_locked) {
+        this.username = username;
+        this.password = password;
+        this.picture = picture;
+        this.attempts = attempts;
+        this.is_locked = is_locked;
+    }
+
     public User(int id, String username, String password, String picture, int attempts, boolean is_locked) {
         this.id = id;
         this.username = username;
