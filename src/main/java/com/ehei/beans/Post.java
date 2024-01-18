@@ -24,8 +24,8 @@ public class Post {
     public Post(int id, String title, String content, String banner, int authorId, LocalDateTime timestamp) {
         this.id = id;
         this.title = title;
-        this.banner = banner;
         this.content = content;
+        this.banner = banner;
         this.authorId = authorId;
         this.timestamp = timestamp;
     }

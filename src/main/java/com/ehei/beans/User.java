@@ -72,7 +72,7 @@ public class User {
         return locked;
     }
 
-    public void setlocked(boolean is_locked) {
+    public void setLocked(boolean is_locked) {
         this.locked = is_locked;
     }
 }

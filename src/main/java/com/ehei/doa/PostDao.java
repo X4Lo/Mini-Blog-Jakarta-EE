@@ -68,7 +68,7 @@ public class PostDao {
         return posts;
     }
 
-    public static List<Post> getPostByAuthorId(int id) {
+    public static List<Post> getPostsByAuthorId(int id) {
         List<Post> posts = new ArrayList<Post>();
 
         String query = "SELECT * FROM posts WHERE authorId=?;";
