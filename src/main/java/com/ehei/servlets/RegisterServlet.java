@@ -62,7 +62,6 @@ public class RegisterServlet extends HttpServlet {
 
                         // fin: username deja utilisé
                     } else { // username est unique
-//                        String imagePath = Tools.saveFile(this, req, "picture"); // enregistrement de l'image
                         String newFileName = "";
                         try {
                             String originalFileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
