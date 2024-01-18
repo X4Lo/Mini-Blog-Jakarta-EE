@@ -41,26 +41,40 @@ public class LoginServlet extends HttpServlet {
 
             if (username.isEmpty() || password.isEmpty()) { // username or password empty
                 resp.sendRedirect("login.jsp");
+                //todo: message d'erreur
             } else {// username and password not empty
                 User user = UserDao.getUserByUsername(username);
                 if (user != null) { // username trouvé
-                    if (!user.getPassword().equals(Tools.toMd5(password))) { // password incorrect
-                        if (user.getAttempts() < 2) { // incrementation des tentatives
-                            user.setAttempts(user.getAttempts() + 1);
-                        } else { // bloquage du compte
-                            user.setAttempts(user.getAttempts() + 1);
-                            user.setIs_locked(true);
-                        } // fin: bloquage du compte
-
+                    if (user.isLocked()) { // compte bloqué
                         resp.sendRedirect("login.jsp");
-                        // fin: password incorrecte
-                    } else { // password correcte
-                        session.setAttribute("is_auth", "true");
-                        session.setAttribute("username", user.getUsername());
-                        session.setAttribute("id", user.getId());
-                    } // fin: password correcte
+                        //todo: message d'erreur
+
+                        //fin: compte bloqué
+                    } else { // compte non bloqué
+                        if (!user.getPassword().equals(Tools.toMd5(password))) { // password incorrect
+                            if (user.getAttempts() < 2) { // incrementation des tentatives
+                                user.setAttempts(user.getAttempts() + 1);
+                            } else { // bloquage du compte
+                                user.setAttempts(user.getAttempts() + 1);
+                                user.setLocked(true);
+                            } // fin: bloquage du compte
+
+                            resp.sendRedirect("login.jsp");
+                            //todo: message d'erreur
+
+                            // fin: password incorrecte
+                        } else { // password correcte
+                            session.setAttribute("is_auth", "true");
+                            session.setAttribute("username", user.getUsername());
+                            session.setAttribute("id", user.getId());
+                            resp.sendRedirect("blogs.jsp");
+                        } // fin: password correcte
+                    } // fin: compte non bloqué
+
                 } else { // username introuvable
                     resp.sendRedirect("login.jsp");
+                    //todo: message d'erreur
+
                 } // fin: username introuvable
             }// fin: username and password not empty
 

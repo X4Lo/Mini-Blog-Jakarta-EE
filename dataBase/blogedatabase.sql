@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Structure de la table `comment`
 --
 
-CREATE TABLE IF NOT EXISTS `comment` (
+CREATE TABLE IF NOT EXISTS `comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `postId` int(11) DEFAULT NULL,
   `authorId` int(11) DEFAULT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
 -- Structure de la table `post`
 --
 
-CREATE TABLE IF NOT EXISTS `post` (
+CREATE TABLE IF NOT EXISTS `posts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `content` text,
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `post` (
 -- Structure de la table `user`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -77,15 +77,15 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 -- Contraintes pour la table `comment`
 --
-ALTER TABLE `comment`
-  ADD CONSTRAINT `FK_Comment_Post` FOREIGN KEY (`postId`) REFERENCES `post` (`id`);
+ALTER TABLE `comments`
+  ADD CONSTRAINT `FK_Comment_Post` FOREIGN KEY (`postId`) REFERENCES `posts` (`id`);
 
 --
 -- Contraintes pour la table `post`
 --
-ALTER TABLE `post`
-  ADD CONSTRAINT `FK_Post_User` FOREIGN KEY (`authorId`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`authorId`) REFERENCES `user` (`id`);
+ALTER TABLE `posts`
+  ADD CONSTRAINT `FK_Post_User` FOREIGN KEY (`authorId`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`authorId`) REFERENCES `users` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
