@@ -68,7 +68,7 @@ public class RegisterServlet extends HttpServlet {
                             newFileName = UUID.randomUUID() + "_" + originalFileName;
 
                             // creating the uploads directory
-                            String uploadPath = getServletContext().getInitParameter("upload.path") + File.separator + "uploads";
+                            String uploadPath = getServletContext().getInitParameter("upload.path") + File.separator + "uploads"+ File.separator + "pictures";
                             File uploadsDir = new File(uploadPath);
                             if (!uploadsDir.exists()) {
                                 uploadsDir.mkdir();
