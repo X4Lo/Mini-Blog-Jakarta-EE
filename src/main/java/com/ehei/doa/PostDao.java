@@ -95,7 +95,7 @@ public class PostDao {
         return posts;
     }
 
-    public static boolean deletePostById(int id) {
+    public static boolean removePostById(int id) {
         String query = "DELETE FROM posts WHERE id=?;";
         try (PreparedStatement preparedStatement = ConnectionDB.getConnection().prepareStatement(query)) {
             preparedStatement.setInt(1, id);
