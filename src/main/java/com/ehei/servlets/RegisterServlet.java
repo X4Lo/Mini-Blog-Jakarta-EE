@@ -10,6 +10,8 @@ import org.apache.logging.log4j.Level;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.UUID;
 
@@ -61,26 +63,25 @@ public class RegisterServlet extends HttpServlet {
                         // fin: username deja utilisé
                     } else { // username est unique
 //                        String imagePath = Tools.saveFile(this, req, "picture"); // enregistrement de l'image
-                        String picture = "";
+                        String newFileName = "";
                         try {
                             String originalFileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+                            newFileName = UUID.randomUUID() + "_" + originalFileName;
 
-                            String newFileName = UUID.randomUUID() + "_" + originalFileName;
-                            picture = newFileName;
-                            String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads";
+                            // creating the uploads directory
+                            String uploadPath = getServletContext().getInitParameter("upload.path") + File.separator + "uploads";
                             File uploadsDir = new File(uploadPath);
                             if (!uploadsDir.exists()) {
                                 uploadsDir.mkdir();
                             }
 
-                            File fileToSave = new File(uploadsDir, newFileName);
-                            System.out.println("Enregistrement du fichier à : " + fileToSave.getAbsolutePath());
-                            filePart.write(fileToSave.getAbsolutePath());
+                            InputStream inputStream = filePart.getInputStream();
+                            Files.copy(inputStream, Paths.get(uploadPath + File.separator + newFileName));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
 
-                        User user = new User(username, Tools.toMd5(password), picture, 0, false);
+                        User user = new User(username, Tools.toMd5(password), newFileName, 0, false);
                         UserDao.Add(user);
 
                         resp.sendRedirect("register.jsp");
