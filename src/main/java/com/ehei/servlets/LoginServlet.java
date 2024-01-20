@@ -20,7 +20,7 @@ public class LoginServlet extends HttpServlet {
         if (session.getAttribute("is_auth") != null) {
             resp.sendRedirect("blogs");
         } else {
-            resp.sendRedirect("login");
+            resp.sendRedirect("login.jsp");
         }
     }
 

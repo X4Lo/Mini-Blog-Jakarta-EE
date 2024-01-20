@@ -21,7 +21,7 @@ public class PostServlet extends HttpServlet {
         HttpSession session = req.getSession();
 
         if (session.getAttribute("is_auth") == null) { // utilisateur n'est pas connecté
-            resp.sendRedirect("login.jsp");
+            resp.sendRedirect("login");
         } else {
             int id = Integer.parseInt(req.getParameter("id"));
 

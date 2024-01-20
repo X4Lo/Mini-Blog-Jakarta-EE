@@ -23,7 +23,7 @@ public class RegisterServlet extends HttpServlet {
         HttpSession session = req.getSession();
 
         if (session.getAttribute("is_auth") != null) {
-            resp.sendRedirect("blogs.jsp");
+            resp.sendRedirect("blogs");
         } else {
             resp.sendRedirect("register.jsp");
         }

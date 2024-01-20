@@ -17,7 +17,7 @@ public class BlogsServlet extends HttpServlet {
         HttpSession session = req.getSession();
 
         if (session.getAttribute("is_auth") == null) { // utilisateur n'est pas connecté
-            resp.sendRedirect("login.jsp");
+            resp.sendRedirect("login");
         } else {
             List<Post> posts = PostDao.getPosts();
             for (Post post : posts) {
