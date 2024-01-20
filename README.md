@@ -1,3 +1,4 @@
+# Mini-Blog-Jakarta-EE
 ## Description
 Mini-Blog-Jakarta-EE is a simple web-based blogging application developed using Jakarta EE. This application allows users to create, modify, and delete blog posts. Each post can be commented on by users.
 
