@@ -1,4 +1,4 @@
-package com.ehei.tools;
+package com.blog.tools;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

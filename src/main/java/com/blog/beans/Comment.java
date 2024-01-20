@@ -1,34 +1,33 @@
-package com.ehei.beans;
+package com.blog.beans;
+
 
 import java.time.LocalDateTime;
 
-public class Post {
+public class Comment {
     private int id;
-    private String title;
-    private String content;
-    private String banner;
+    private int postId;
     private int authorId;
     private String authorUsername;
     private String authorPicture;
+
+    private String content;
     private LocalDateTime timestamp;
 
-    public Post() {
+    public Comment() {
     }
 
-    public Post(String title, String content, String banner, int authorId, LocalDateTime timestamp) {
-        this.title = title;
-        this.content = content;
-        this.banner = banner;
+    public Comment(int postId, int authorId, String content, LocalDateTime timestamp) {
+        this.postId = postId;
         this.authorId = authorId;
+        this.content = content;
         this.timestamp = timestamp;
     }
 
-    public Post(int id, String title, String content, String banner, int authorId, LocalDateTime timestamp) {
+    public Comment(int id, int postId, int authorId, String content, LocalDateTime timestamp) {
         this.id = id;
-        this.title = title;
-        this.content = content;
-        this.banner = banner;
+        this.postId = postId;
         this.authorId = authorId;
+        this.content = content;
         this.timestamp = timestamp;
     }
 
@@ -40,28 +39,12 @@ public class Post {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public int getPostId() {
+        return postId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getBanner() {
-        return banner;
-    }
-
-    public void setBanner(String banner) {
-        this.banner = banner;
+    public void setPostId(int postId) {
+        this.postId = postId;
     }
 
     public int getAuthorId() {
@@ -88,6 +71,14 @@ public class Post {
         this.authorPicture = authorPicture;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public LocalDateTime getTimestamp() {
         return timestamp;
     }
@@ -95,4 +86,6 @@ public class Post {
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
+
+
 }

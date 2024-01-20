@@ -1,7 +1,7 @@
-package com.ehei.servlets;
+package com.blog.servlets;
 
-import com.ehei.beans.Post;
-import com.ehei.doa.PostDao;
+import com.blog.beans.Post;
+import com.blog.dao.PostDao;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;

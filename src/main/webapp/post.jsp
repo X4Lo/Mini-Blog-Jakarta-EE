@@ -1,5 +1,5 @@
-<%@ page import="com.ehei.beans.Post" %>
-<%@ page import="com.ehei.beans.User" %>
+<%@ page import="com.blog.beans.Post" %>
+<%@ page import="com.blog.beans.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 

@@ -1,4 +1,4 @@
-package com.ehei.tools;
+package com.blog.tools;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;

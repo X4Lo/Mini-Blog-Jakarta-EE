@@ -1,11 +1,11 @@
-package com.ehei.servlets;
+package com.blog.servlets;
 
-import com.ehei.beans.Comment;
-import com.ehei.beans.Post;
-import com.ehei.beans.User;
-import com.ehei.doa.CommentDao;
-import com.ehei.doa.PostDao;
-import com.ehei.doa.UserDao;
+import com.blog.beans.Comment;
+import com.blog.beans.Post;
+import com.blog.beans.User;
+import com.blog.dao.CommentDao;
+import com.blog.dao.PostDao;
+import com.blog.dao.UserDao;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
