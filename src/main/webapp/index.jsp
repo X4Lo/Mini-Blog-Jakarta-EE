@@ -1,13 +1,25 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <title>Blog | Home</title>
 </head>
 <body>
-<h1><%= "Hello World!" %>
+<h1>Welcome to Blog!
 </h1>
 <br/>
-<a href="hello-servlet">Hello Servlet</a>
+<%
+    if (session.getAttribute("username") == null) {
+%>
+<h3>
+    <a href="login">Login</a> or <a href="register">Register</a> to start posting!
+</h3>
+<%
+} else {
+%>
+<h3>Welcome back ${sessionScope.username}!</h3>
+<%
+    }
+%>
+
 </body>
 </html>

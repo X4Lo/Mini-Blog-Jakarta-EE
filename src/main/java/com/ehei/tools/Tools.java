@@ -6,9 +6,6 @@ import org.apache.logging.log4j.Logger;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDateTime;
-
-import static java.time.temporal.ChronoUnit.HOURS;
 
 public final class Tools {
     private static final Logger logger = LogManager.getLogger(Tools.class);
@@ -42,11 +39,6 @@ public final class Tools {
             return null;
         }
     }
-
-    public static long getHourDifference(LocalDateTime startDate, LocalDateTime endDate) {
-        return HOURS.between(endDate, startDate);
-    }
-
 
 }
 
