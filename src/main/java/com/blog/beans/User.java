@@ -1,4 +1,4 @@
-package com.ehei.beans;
+package com.blog.beans;
 
 public class User {
     private int id;

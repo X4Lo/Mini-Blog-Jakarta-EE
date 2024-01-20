@@ -1,8 +1,8 @@
-package com.ehei.servlets;
+package com.blog.servlets;
 
-import com.ehei.beans.User;
-import com.ehei.doa.UserDao;
-import com.ehei.tools.Tools;
+import com.blog.beans.User;
+import com.blog.dao.UserDao;
+import com.blog.tools.Tools;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;

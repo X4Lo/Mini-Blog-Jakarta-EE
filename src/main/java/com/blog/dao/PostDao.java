@@ -1,7 +1,7 @@
-package com.ehei.doa;
+package com.blog.dao;
 
-import com.ehei.beans.Post;
-import com.ehei.tools.ConnectionDB;
+import com.blog.beans.Post;
+import com.blog.tools.ConnectionDB;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
