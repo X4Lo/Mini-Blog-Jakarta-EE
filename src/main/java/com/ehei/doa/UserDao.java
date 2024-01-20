@@ -1,10 +1,7 @@
 package com.ehei.doa;
 
-import com.ehei.beans.Comment;
 import com.ehei.beans.User;
 import com.ehei.tools.ConnectionDB;
-import com.ehei.tools.Tools;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;

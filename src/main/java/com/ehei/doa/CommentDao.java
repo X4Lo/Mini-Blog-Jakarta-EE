@@ -11,6 +11,31 @@ import java.util.List;
 
 public class CommentDao {
 
+    public static Comment getCommentById(int id) {
+        String query = "SELECT * FROM comments WHERE id = ?;";
+        try (PreparedStatement preparedStatement = ConnectionDB.getConnection().prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                Comment comment = new Comment(
+                        rs.getInt("id"),
+                        rs.getInt("postId"),
+                        rs.getInt("authorId"),
+                        rs.getString("content"),
+                        rs.getTimestamp("timestamp").toLocalDateTime()
+                );
+
+                return comment;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
     public static List<Comment> getPostCommentsOffset(int postId, int limit, int offset) {
         List<Comment> comments = new ArrayList<Comment>();
@@ -38,6 +63,20 @@ public class CommentDao {
         }
 
         return comments;
+    }
+
+    public static boolean removeCommentById(int id) {
+        String query = "DELETE FROM comments WHERE id=?;";
+        try (PreparedStatement preparedStatement = ConnectionDB.getConnection().prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+
+            int updated = preparedStatement.executeUpdate();
+            return updated != 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
     public static boolean removeCommentsByPostId(int postId) {

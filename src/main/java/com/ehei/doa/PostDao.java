@@ -1,13 +1,10 @@
 package com.ehei.doa;
 
 import com.ehei.beans.Post;
-import com.ehei.beans.User;
 import com.ehei.tools.ConnectionDB;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
