@@ -12,9 +12,8 @@ public class LogoutServlet extends HttpServlet {
         HttpSession session = req.getSession();
         if (session.getAttribute("is_auth") != null) {
             session.invalidate();
-            resp.sendRedirect("blogs");
-        } else {
-            resp.sendRedirect("login");
         }
+
+        resp.sendRedirect("index.jsp");
     }
 }

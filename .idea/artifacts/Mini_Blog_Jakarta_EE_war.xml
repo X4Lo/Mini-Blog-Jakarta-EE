@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="Blog-1.0-SNAPSHOT.war">
+    <root id="archive" name="Mini-Blog-Jakarta-EE-1.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="Mini-Blog-Jakarta-EE:war exploded" />
     </root>
   </artifact>
