@@ -8,6 +8,8 @@ public class Post {
     private String content;
     private String banner;
     private int authorId;
+    private String authorUsername;
+    private String authorPicture;
     private LocalDateTime timestamp;
 
     public Post() {
@@ -68,6 +70,22 @@ public class Post {
 
     public void setAuthorId(int authorId) {
         this.authorId = authorId;
+    }
+
+    public String getAuthorUsername() {
+        return authorUsername;
+    }
+
+    public void setAuthorUsername(String authorUsername) {
+        this.authorUsername = authorUsername;
+    }
+
+    public String getAuthorPicture() {
+        return authorPicture;
+    }
+
+    public void setAuthorPicture(String authorPicture) {
+        this.authorPicture = authorPicture;
     }
 
     public LocalDateTime getTimestamp() {

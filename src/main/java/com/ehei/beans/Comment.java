@@ -1,11 +1,15 @@
 package com.ehei.beans;
 
+
 import java.time.LocalDateTime;
 
 public class Comment {
     private int id;
     private int postId;
     private int authorId;
+    private String authorUsername;
+    private String authorPicture;
+
     private String content;
     private LocalDateTime timestamp;
 
@@ -51,6 +55,22 @@ public class Comment {
         this.authorId = authorId;
     }
 
+    public String getAuthorUsername() {
+        return authorUsername;
+    }
+
+    public void setAuthorUsername(String authorUsername) {
+        this.authorUsername = authorUsername;
+    }
+
+    public String getAuthorPicture() {
+        return authorPicture;
+    }
+
+    public void setAuthorPicture(String authorPicture) {
+        this.authorPicture = authorPicture;
+    }
+
     public String getContent() {
         return content;
     }
@@ -66,4 +86,6 @@ public class Comment {
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
+
+
 }
