@@ -19,7 +19,7 @@ import java.util.UUID;
 @WebServlet(name = "registerServlet", value = "/register")
 public class RegisterServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
 
         if (session.getAttribute("is_auth") != null) {
@@ -68,7 +68,7 @@ public class RegisterServlet extends HttpServlet {
                             newFileName = UUID.randomUUID() + "_" + originalFileName;
 
                             // creating the uploads directory
-                            String uploadPath = getServletContext().getInitParameter("upload.path") + File.separator + "uploads"+ File.separator + "pictures";
+                            String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads" + File.separator + "pictures";
                             File uploadsDir = new File(uploadPath);
                             if (!uploadsDir.exists()) {
                                 uploadsDir.mkdir();
@@ -83,7 +83,7 @@ public class RegisterServlet extends HttpServlet {
                         User user = new User(username, Tools.toMd5(password), newFileName, 0, false);
                         UserDao.Add(user);
 
-                        resp.sendRedirect("register.jsp");
+                        resp.sendRedirect("login.jsp");
                         //todo: Confirmation Msg: Compte crée
                     } // fin: username est unique
                 } // fin: mdp == mdgConfirm

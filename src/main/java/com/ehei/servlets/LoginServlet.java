@@ -2,24 +2,19 @@ package com.ehei.servlets;
 
 import com.ehei.beans.User;
 import com.ehei.doa.UserDao;
-import com.ehei.tools.ConnectionDB;
 import com.ehei.tools.Tools;
 import jakarta.servlet.http.HttpServlet;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
+import java.io.File;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 @WebServlet(name = "loginServlet", value = "/login")
 public class LoginServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
 
         if (session.getAttribute("is_auth") != null) {
@@ -30,11 +25,11 @@ public class LoginServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
 
         if (session.getAttribute("is_auth") != null) {
-            resp.sendRedirect("blogs.jsp");
+            resp.sendRedirect("blogs");
         } else {
             String username = req.getParameter("username");
             String password = req.getParameter("password");
@@ -64,10 +59,14 @@ public class LoginServlet extends HttpServlet {
 
                             // fin: password incorrecte
                         } else { // password correcte
+                            String picturePath = "uploads" + File.separator + "pictures" + File.separator + user.getPicture();
+
                             session.setAttribute("is_auth", "true");
                             session.setAttribute("username", user.getUsername());
                             session.setAttribute("id", user.getId());
-                            resp.sendRedirect("blogs.jsp");
+                            session.setAttribute("picture", picturePath);
+
+                            resp.sendRedirect("blogs");
                         } // fin: password correcte
                     } // fin: compte non bloqué
 
