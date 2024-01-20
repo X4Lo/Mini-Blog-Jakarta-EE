@@ -70,7 +70,7 @@
     <div style="display: inline-block; margin-bottom: 10px;">
       <div class="btn-group " role="group" aria-label="Basic example">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCardModal">
-          Add Card
+          Add Post
         </button>
       </div>
     </div>
