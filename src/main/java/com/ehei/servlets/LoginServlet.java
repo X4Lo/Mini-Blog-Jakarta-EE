@@ -18,9 +18,9 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = req.getSession();
 
         if (session.getAttribute("is_auth") != null) {
-            resp.sendRedirect("blogs.jsp");
+            resp.sendRedirect("blogs");
         } else {
-            resp.sendRedirect("login.jsp");
+            resp.sendRedirect("login");
         }
     }
 
