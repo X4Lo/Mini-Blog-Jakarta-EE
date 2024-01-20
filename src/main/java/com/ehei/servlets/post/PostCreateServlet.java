@@ -1,14 +1,10 @@
 package com.ehei.servlets.post;
 
 import com.ehei.beans.Post;
-import com.ehei.beans.User;
 import com.ehei.doa.PostDao;
-import com.ehei.doa.UserDao;
-import com.ehei.tools.Tools;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import org.apache.logging.log4j.Level;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +14,8 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@WebServlet(name = "PostCreateServlet", value = "/post/create")
+@MultipartConfig
+@WebServlet(name = "PostCreateServlet", value = "/postCreate")
 public class PostCreateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,7 +28,7 @@ public class PostCreateServlet extends HttpServlet {
             String content = req.getParameter("content");
             Part filePart = req.getPart("banner");
 
-            if (title.isEmpty() || content.isEmpty() || filePart == null) { // l'un des champs est vide
+            if (title.isEmpty() || content.isEmpty()) { // l'un des champs est vide
                 resp.sendRedirect("blogs.jsp");
                 //todo: Error Msg: (entrez tous les champs)
             } else { // les champs sont pas vide
@@ -41,7 +38,7 @@ public class PostCreateServlet extends HttpServlet {
                     newFileName = UUID.randomUUID() + "_" + originalFileName;
 
                     // creating the uploads directory
-                    String uploadPath = getServletContext().getInitParameter("upload.path") + File.separator + "uploads"+ File.separator + "posts";
+                    String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads" + File.separator + "banners";
                     File uploadsDir = new File(uploadPath);
                     if (!uploadsDir.exists()) {
                         uploadsDir.mkdir();
@@ -57,7 +54,7 @@ public class PostCreateServlet extends HttpServlet {
                 Post post = new Post(title, content, newFileName, userId, LocalDateTime.now());
                 PostDao.Add(post);
 
-                resp.sendRedirect("blogs.jsp");
+                resp.sendRedirect("blogs");
                 //todo: Redirection: vers le post crée
             } // fin: les champs sont pas vide
         } // fin: utilisateur est connecté

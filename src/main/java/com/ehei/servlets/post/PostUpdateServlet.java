@@ -2,21 +2,19 @@ package com.ehei.servlets.post;
 
 import com.ehei.beans.Post;
 import com.ehei.doa.PostDao;
-import com.ehei.tools.Tools;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import org.apache.logging.log4j.Level;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
-@WebServlet(name = "PostUpdateServlet", value = "/post/update")
+@MultipartConfig
+@WebServlet(name = "PostUpdateServlet", value = "/postUpdate")
 public class PostUpdateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,19 +28,19 @@ public class PostUpdateServlet extends HttpServlet {
             String content = req.getParameter("content");
             Part filePart = req.getPart("banner");
 
-            if (req.getParameter("id").isEmpty() || title.isEmpty() || content.isEmpty() || filePart == null) { // l'un des champs est vide
-                resp.sendRedirect("blogs.jsp");
+            if (req.getParameter("id").isEmpty() || title.isEmpty() || content.isEmpty()) { // l'un des champs est vide
+                resp.sendRedirect("blogs");
                 //todo: Redirection: vers le post
             } else { // les champs sont pas vide
                 Post post = PostDao.getPostById(id);
 
                 if (post == null) { // aucun post trouvé avec l'id fournie
-                    resp.sendRedirect("blogs.jsp");
+                    resp.sendRedirect("blogs");
                 } else { // post trouvé
                     int userId = (int) session.getAttribute("id");
 
                     if (post.getAuthorId() != userId) { // l'utilisateur n'est pas l'auteur du post
-                        resp.sendRedirect("blogs.jsp");
+                        resp.sendRedirect("blogs");
                     } else { // l'utilisateur est l'auteur du post
                         //todo: suppression de l'ancien banner
 
@@ -52,7 +50,7 @@ public class PostUpdateServlet extends HttpServlet {
                             newFileName = UUID.randomUUID() + "_" + originalFileName;
 
                             // creating the uploads directory
-                            String uploadPath = getServletContext().getInitParameter("upload.path") + File.separator + "uploads"+ File.separator + "posts";
+                            String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads" + File.separator + "banners";
                             File uploadsDir = new File(uploadPath);
                             if (!uploadsDir.exists()) {
                                 uploadsDir.mkdir();
@@ -69,7 +67,7 @@ public class PostUpdateServlet extends HttpServlet {
                         post.setBanner(newFileName);
                         PostDao.Update(post);
 
-                        resp.sendRedirect("blogs.jsp");
+                        resp.sendRedirect("blogs");
                         //todo: Redirection: vers le post modifée
                         //todo: Confirm Msg: Post supprimée
                     } // fin: l'utilisateur est l'auteur du post
