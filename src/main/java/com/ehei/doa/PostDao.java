@@ -40,6 +40,32 @@ public class PostDao {
         return null;
     }
 
+    public static List<Post> getPosts() {
+        List<Post> posts = new ArrayList<Post>();
+
+        String query = "SELECT * FROM posts ORDER BY 'timestamp';";
+        try (PreparedStatement preparedStatement = ConnectionDB.getConnection().prepareStatement(query)) {
+
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Post post = new Post(
+                        rs.getInt("id"),
+                        rs.getString("title"),
+                        rs.getString("content"),
+                        rs.getString("banner"),
+                        rs.getInt("authorId"),
+                        rs.getTimestamp("timestamp").toLocalDateTime()
+                );
+
+                posts.add(post);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return posts;
+    }
+
     public static List<Post> getPostsOffset(int limit, int offset) {
         List<Post> posts = new ArrayList<Post>();
 
@@ -49,7 +75,7 @@ public class PostDao {
             preparedStatement.setInt(2, offset);
 
             ResultSet rs = preparedStatement.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 Post post = new Post(
                         rs.getInt("id"),
                         rs.getString("title"),
@@ -76,7 +102,7 @@ public class PostDao {
             preparedStatement.setInt(1, id);
 
             ResultSet rs = preparedStatement.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 Post post = new Post(
                         rs.getInt("id"),
                         rs.getString("title"),
@@ -96,6 +122,8 @@ public class PostDao {
     }
 
     public static boolean removePostById(int id) {
+        CommentDao.removeCommentsByPostId(id);
+
         String query = "DELETE FROM posts WHERE id=?;";
         try (PreparedStatement preparedStatement = ConnectionDB.getConnection().prepareStatement(query)) {
             preparedStatement.setInt(1, id);

@@ -15,16 +15,14 @@ public class CommentDao {
     public static List<Comment> getPostCommentsOffset(int postId, int limit, int offset) {
         List<Comment> comments = new ArrayList<Comment>();
 
-        String query = "SELECT * FROM comment WHERE postId=? ORDER BY 'timestamp' DESC LIMIT ? OFFSET ?;";
+        String query = "SELECT * FROM comments WHERE postId=? ORDER BY 'timestamp' DESC LIMIT ? OFFSET ?;";
         try (PreparedStatement preparedStatement = ConnectionDB.getConnection().prepareStatement(query)) {
             preparedStatement.setInt(1, postId);
             preparedStatement.setInt(2, limit);
             preparedStatement.setInt(3, offset);
 
             ResultSet rs = preparedStatement.executeQuery();
-            if (rs.next()) {
-
-
+            while (rs.next()) {
                 Comment comment = new Comment(
                         rs.getInt("id"),
                         rs.getInt("postId"),
@@ -42,10 +40,10 @@ public class CommentDao {
         return comments;
     }
 
-    private static boolean removeCommentById(int id) {
-        String query = "DELETE FROM comments WHERE id=?;";
+    public static boolean removeCommentsByPostId(int postId) {
+        String query = "DELETE FROM comments WHERE postId=?;";
         try (PreparedStatement preparedStatement = ConnectionDB.getConnection().prepareStatement(query)) {
-            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(1, postId);
 
             int updated = preparedStatement.executeUpdate();
             return updated != 0;
@@ -56,8 +54,8 @@ public class CommentDao {
         return false;
     }
 
-    private static boolean Add(Comment comment) {
-        String query = "INSERT INTO comments VALUES (NULL, ?, ?, ?, ?, ?);";
+    public static boolean Add(Comment comment) {
+        String query = "INSERT INTO comments VALUES (NULL, ?, ?, ?, ?);";
         try (PreparedStatement preparedStatement = ConnectionDB.getConnection().prepareStatement(query)) {
             preparedStatement.setInt(1, comment.getPostId());
             preparedStatement.setInt(2, comment.getAuthorId());

@@ -1,11 +1,14 @@
 package com.ehei.doa;
 
+import com.ehei.beans.Comment;
 import com.ehei.beans.User;
 import com.ehei.tools.ConnectionDB;
 import com.ehei.tools.Tools;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDao {
 
@@ -61,6 +64,31 @@ public class UserDao {
         }
 
         return null;
+    }
+
+    public static List<User> getUsers() {
+        List<User> users = new ArrayList<User>();
+
+        String query = "SELECT * FROM users;";
+        try (PreparedStatement preparedStatement = ConnectionDB.getConnection().prepareStatement(query)) {
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                User user = new User(
+                        rs.getInt("id"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getString("picture"),
+                        rs.getInt("attempts"),
+                        rs.getBoolean("locked")
+                );
+
+                users.add(user);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return users;
     }
 
     public static boolean Add(User user) {
